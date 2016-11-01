@@ -2,6 +2,9 @@
 
 A Python API for Imperial College Union's [eActivities](https://eactivities.union.ic.ac.uk).
 
+## Install
+    pip install icu-ea-api
+
 ## Example
 
     from icu_ea_api import ICUEActivitiesAPI
