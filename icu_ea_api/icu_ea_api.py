@@ -32,11 +32,12 @@ class ICUEActivitiesAPI:
         'list_years':                   '/CSP/{code}/Years',
     }
 
-    def __init__(self, csp_code, api_key):
+    def __init__(self, csp_code, api_key, year):
         self.csp_code = csp_code
         self.headers = {
             'X-API-Key': api_key,
         }
+        self.year = year
         self.__setup_functions()
 
     def __setup_functions(self):
@@ -52,6 +53,7 @@ class ICUEActivitiesAPI:
     def __create_function(self, function_name):
         def __call_function(*args, **kwargs):
             path_format = self.paths[function_name]
-            path = path_format.format(code=self.csp_code, **kwargs)
+            year = kwargs.get('year') or self.year
+            path = path_format.format(code=self.csp_code, year=year, **kwargs)
             return self.__get_json(path)
         return __call_function
